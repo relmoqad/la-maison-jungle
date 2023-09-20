@@ -1,7 +1,8 @@
 import { plantList } from "../datas/plantList";
 import "../styles/ShoppingList.css";
+import PlantItem from "./PlantItem";
 
-export default function ShoppingList() {
+function ShoppingList() {
   const categories = plantList.reduce(
     (acc, plant) =>
       acc.includes(plant.category) ? acc : acc.concat(plant.category),
@@ -15,14 +16,19 @@ export default function ShoppingList() {
           <li key={cat}>{cat}</li>
         ))}
       </ul>
-      <ul>
+      <ul className="lmj-plant-list">
         {plantList.map((plant) => (
-          <li key={plant.id} className="lmj-plant-item">
-            {plant.name}
-            {plant.isSpecialOffer && <div className="lmj-sales">Soldes</div>}
-          </li>
+          <PlantItem
+            name={plant.name}
+            cover={plant.cover}
+            id={plant.id}
+            light={plant.light}
+            water={plant.water}
+          />
         ))}
       </ul>
     </div>
   );
 }
+
+export default ShoppingList;
